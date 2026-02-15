@@ -1,0 +1,33 @@
+{
+  "name": "satsrail-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for SatsRail — let AI agents accept Bitcoin Lightning payments",
+  "main": "src/index.js",
+  "bin": {
+    "satsrail-mcp": "src/index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1"
+  },
+  "keywords": [
+    "mcp",
+    "bitcoin",
+    "lightning",
+    "payments",
+    "satsrail",
+    "ai-agents"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SatsRail/satsrail-mcp.git"
+  },
+  "homepage": "https://app.satsrail.com/developers",
+  "engines": {
+    "node": ">=18"
+  }
+}
