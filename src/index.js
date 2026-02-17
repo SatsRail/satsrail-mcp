@@ -124,14 +124,14 @@ server.tool(
   "List orders for the merchant. Optionally filter by status.",
   {
     status: z
-      .enum(["pending", "paid", "partially_paid", "overpaid", "expired", "cancelled", "refunded"])
+      .enum(["pending", "invoice_generated", "paid", "cancelled", "refunded"])
       .optional()
       .describe("Filter by status"),
     page: z.number().int().optional().describe("Page number"),
   },
   async ({ status, page }) => {
     const params = new URLSearchParams();
-    if (status) params.set("status", status);
+    if (status) params.set("q[status_eq]", status);
     if (page) params.set("page", String(page));
     const query = params.toString() ? `?${params}` : "";
     const data = await api("GET", `/orders${query}`);
@@ -208,14 +208,14 @@ server.tool(
   "list_payments",
   "List confirmed payments. Optionally filter by date range.",
   {
-    start_date: z.string().optional().describe("Start date (YYYY-MM-DD)"),
-    end_date: z.string().optional().describe("End date (YYYY-MM-DD)"),
+    confirmed_after: z.string().optional().describe("Filter payments confirmed on or after this date (ISO 8601, e.g. 2026-01-01)"),
+    confirmed_before: z.string().optional().describe("Filter payments confirmed on or before this date (ISO 8601)"),
     page: z.number().int().optional().describe("Page number"),
   },
-  async ({ start_date, end_date, page }) => {
+  async ({ confirmed_after, confirmed_before, page }) => {
     const params = new URLSearchParams();
-    if (start_date) params.set("start_date", start_date);
-    if (end_date) params.set("end_date", end_date);
+    if (confirmed_after) params.set("q[confirmed_at_gteq]", confirmed_after);
+    if (confirmed_before) params.set("q[confirmed_at_lteq]", confirmed_before);
     if (page) params.set("page", String(page));
     const query = params.toString() ? `?${params}` : "";
     const data = await api("GET", `/payments${query}`);
