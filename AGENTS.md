@@ -1,4 +1,4 @@
-# SatsRail MCP Server — CLAUDE.md
+# SatsRail MCP Server — AGENTS.md
 
 MCP (Model Context Protocol) server for AI tool integration with SatsRail. Allows AI agents to interact with the SatsRail API through standardized tool calls.
 
