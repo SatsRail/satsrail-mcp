@@ -39,7 +39,7 @@
     "type": "git",
     "url": "https://github.com/SatsRail/satsrail-mcp.git"
   },
-  "homepage": "https://satsrail.com/developers/ai-agents",
+  "homepage": "https://www.satsrail.com/developers/ai-agents",
   "engines": {
     "node": ">=18"
   }

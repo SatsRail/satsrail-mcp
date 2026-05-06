@@ -7,7 +7,7 @@
     <a href="https://www.npmjs.com/package/satsrail-mcp"><img src="https://img.shields.io/npm/v/satsrail-mcp" alt="npm"></a>
     <a href="https://github.com/SatsRail/satsrail-mcp/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/satsrail-mcp" alt="license"></a>
     <a href="https://modelcontextprotocol.io"><img src="https://img.shields.io/badge/protocol-MCP-blue" alt="MCP"></a>
-    <a href="https://satsrail.com"><img src="https://img.shields.io/badge/payments-Lightning-orange" alt="Lightning"></a>
+    <a href="https://www.satsrail.com/"><img src="https://img.shields.io/badge/payments-Lightning-orange" alt="Lightning"></a>
   </p>
 </p>
 
@@ -32,7 +32,7 @@ Give any MCP-compatible AI agent the ability to accept Bitcoin Lightning payment
 
 ### 1. Get your API key
 
-Sign up at [satsrail.com](https://satsrail.com) and grab your secret key (`sk_live_...` or `sk_test_...`) from the dashboard.
+Sign up at [satsrail.com](https://www.satsrail.com/) and grab your secret key (`sk_live_...` or `sk_test_...`) from the dashboard.
 
 ### 2. Configure your AI tool
 
@@ -186,5 +186,5 @@ MIT — see [LICENSE](LICENSE) for details.
 
 <p align="center">
   <strong>The payment rail for the agent economy.</strong><br>
-  <a href="https://satsrail.com">satsrail.com</a> · <a href="https://x.com/satsrail">@satsrail</a>
+  <a href="https://www.satsrail.com/">satsrail.com</a> · <a href="https://x.com/satsrail">@satsrail</a>
 </p>
