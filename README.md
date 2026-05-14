@@ -157,7 +157,7 @@ Use `sk_test_*` keys to create test orders and invoices in a fully isolated sand
 
 ## Non-Custodial
 
-SatsRail never holds your funds. Connect your own Lightning node — payments settle directly to your wallet. [Learn more about our non-custodial architecture →](https://satsrail.com/blog/how-non-custodial-bitcoin-lightning-payments-actually-work)
+SatsRail never holds your funds. Connect your own Lightning node — payments settle directly to your wallet. [Learn more about our non-custodial architecture →](https://www.satsrail.com/blog/how-non-custodial-bitcoin-lightning-payments-actually-work)
 
 ## SDKs
 
@@ -169,10 +169,12 @@ Need direct API access instead of MCP? Use our SDKs:
 
 ## Resources
 
-- [Developer Docs](https://satsrail.com/developers) — Quickstart, testing, webhooks, embed
-- [AI Agents Guide](https://satsrail.com/developers/ai-agents) — Agent payment flows and architecture
-- [API Reference](https://satsrail.com/api-docs) — Full REST API documentation
-- [Blog](https://satsrail.com/blog) — Lightning payments, agent economy, Bitcoin adoption
+- [Developer Docs](https://developer.satsrail.com/) — Quickstart, testing, webhooks, embed
+- [AI Agents Guide](https://developer.satsrail.com/ai-agents) — Agent payment flows and architecture
+- [API Reference](https://developer.satsrail.com/) — Full REST API documentation
+- [Use Cases](https://www.satsrail.com/use-cases/) — Bitcoin payments across industries
+- [Pricing](https://www.satsrail.com/pricing/) — Zero transaction fees
+- [Blog](https://www.satsrail.com/blog/) — Lightning payments, agent economy, Bitcoin adoption
 
 ## Contributing
 
