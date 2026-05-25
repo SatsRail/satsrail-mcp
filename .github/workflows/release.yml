@@ -1,0 +1,50 @@
+name: Release
+
+# Triggered by pushing a tag like v1.2.0. The version in package.json must
+# match the tag (without the leading v) or the publish will fail loudly.
+#
+# Uses npm OIDC trusted publishing — no NPM_TOKEN secret to rotate. Requires
+# the package to be configured for trusted publishing on npmjs.com:
+#   1. npmjs.com → satsrail-mcp → Settings → Publishing access
+#   2. Add publisher: SatsRail/satsrail-mcp, workflow .github/workflows/release.yml
+# See https://docs.npmjs.com/trusted-publishers for the one-time setup.
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  id-token: write # required for npm provenance / OIDC
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          registry-url: "https://registry.npmjs.org"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Verify tag matches package.json version
+        run: |
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          TAG_VERSION=${GITHUB_REF_NAME#v}
+          if [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
+            echo "Tag $GITHUB_REF_NAME does not match package.json version $PKG_VERSION"
+            exit 1
+          fi
+
+      - name: Publish to npm
+        run: npm publish --provenance --access public

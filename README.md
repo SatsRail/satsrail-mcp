@@ -5,6 +5,7 @@
   </p>
   <p align="center">
     <a href="https://www.npmjs.com/package/satsrail-mcp"><img src="https://img.shields.io/npm/v/satsrail-mcp" alt="npm"></a>
+    <a href="https://github.com/SatsRail/satsrail-mcp/actions/workflows/test.yml"><img src="https://github.com/SatsRail/satsrail-mcp/actions/workflows/test.yml/badge.svg" alt="tests"></a>
     <a href="https://github.com/SatsRail/satsrail-mcp/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/satsrail-mcp" alt="license"></a>
     <a href="https://modelcontextprotocol.io"><img src="https://img.shields.io/badge/protocol-MCP-blue" alt="MCP"></a>
     <a href="https://www.satsrail.com/"><img src="https://img.shields.io/badge/payments-Lightning-orange" alt="Lightning"></a>
@@ -94,29 +95,82 @@ The agent calls `create_order`, returns the bolt11 Lightning invoice, and the cu
 
 ## Available Tools
 
+46 tools covering the full SatsRail merchant API.
+
 ### Orders
 | Tool | Description |
 |------|-------------|
-| `create_order` | Create a payment order with optional auto-generated Lightning invoice |
+| `create_order` | Create a payment order with optional auto-generated Lightning invoice. Supports `idempotency_key`. |
 | `get_order` | Get order details by ID (expandable: invoice, payment, merchant) |
-| `list_orders` | List and filter orders by status |
+| `list_orders` | List and filter orders by status, currency, amount range, date range |
+| `update_order` | Update a pending order, mark cash orders paid, mark paid orders shipped |
 | `cancel_order` | Cancel a pending order |
 
-### Invoices & Payments
+### Invoices
 | Tool | Description |
 |------|-------------|
 | `get_invoice` | Get invoice details including bolt11 Lightning payment string |
-| `generate_invoice` | Generate a new invoice for an existing order |
+| `generate_invoice` | Generate a new invoice for an existing order. Supports `idempotency_key`. |
 | `check_invoice_status` | Real-time payment verification against the Lightning node |
-| `list_payments` | List confirmed payments with optional date range filter |
-| `get_payment` | Get payment details by ID |
+| `get_invoice_qr` | Get a QR code (SVG) for an invoice |
 
-### Checkout & Config
+### Payments
 | Tool | Description |
 |------|-------------|
-| `create_checkout_session` | Create a hosted checkout session with redirect URL |
-| `get_merchant` | Get merchant profile and settings |
-| `list_wallets` | List connected Lightning wallets |
+| `list_payments` | List confirmed payments with optional date and amount filters |
+| `get_payment` | Get payment details by ID |
+
+### Payment Requests
+| Tool | Description |
+|------|-------------|
+| `create_payment_request` | One-call flow: creates an Order and Invoice together. Supports `idempotency_key`. |
+| `get_payment_request` | Get details of a payment request |
+| `get_payment_request_status` | Real-time payment status |
+
+### Checkout Sessions
+| Tool | Description |
+|------|-------------|
+| `create_checkout_session` | Create a hosted checkout. Supports `product_id`, customer pre-fill, success/cancel URLs |
+| `list_checkout_sessions` | List sessions with filters |
+| `get_checkout_session` | Get session by ID |
+
+### Products
+| Tool | Description |
+|------|-------------|
+| `list_products` | List products with name/status/SKU/external_ref filters |
+| `get_product` | Get a product (UUID or slug) |
+| `create_product` / `update_product` / `delete_product` | Full CRUD |
+| `get_product_key` | Read the AES-256-GCM encryption key (sensitive — for re-encryption windows) |
+| `rotate_product_key` | Rotate the encryption key, retaining old_key for re-encryption |
+| `clear_product_old_key` | Clear old_key after re-encryption is complete |
+
+### Product Types
+| Tool | Description |
+|------|-------------|
+| `list_product_types` / `get_product_type` / `create_product_type` / `update_product_type` / `delete_product_type` | Full CRUD for product categories |
+
+### Webhooks
+| Tool | Description |
+|------|-------------|
+| `list_webhooks` / `get_webhook` / `create_webhook` / `update_webhook` / `delete_webhook` | Full CRUD for webhook endpoints (signing secret returned once on create) |
+
+### Catalog & Merchant
+| Tool | Description |
+|------|-------------|
+| `get_catalog` | Full catalog: product types, products, taxes, discounts |
+| `get_catalog_version` | Lightweight version timestamp for cache invalidation |
+| `get_merchant` | Current merchant profile and settings |
+| `list_wallets` / `get_wallet` | Connected Lightning / Bitcoin wallets |
+
+### Compliance & Access
+| Tool | Description |
+|------|-------------|
+| `list_merchant_documents` / `get_merchant_document` / `delete_merchant_document` | Manage KYC and compliance documents (upload via dashboard) |
+| `verify_access_token` | Verify a macaroon access token, returns key + remaining time on success |
+| `get_api_token_usage` | RPM and monthly request stats for an API token |
+| `list_subscription_plans` | Public list of subscription plans (no auth required) |
+
+All `list_*` tools accept `page` and `per_page` (1–100, default 25). All `metadata` fields follow the portal's limits: ≤50 keys, ≤40-char keys, ≤500-char string values.
 
 ## Example: Complete Payment Flow
 
@@ -175,6 +229,22 @@ Need direct API access instead of MCP? Use our SDKs:
 - [Use Cases](https://www.satsrail.com/use-cases/) — Bitcoin payments across industries
 - [Pricing](https://www.satsrail.com/pricing/) — Zero transaction fees
 - [Blog](https://www.satsrail.com/blog/) — Lightning payments, agent economy, Bitcoin adoption
+
+## Local development
+
+```bash
+git clone https://github.com/SatsRail/satsrail-mcp
+cd satsrail-mcp
+npm install
+npm test            # vitest — unit + smoke against a fake server
+SATSRAIL_API_KEY=sk_test_xxx npm start
+```
+
+Drive it interactively with the [MCP Inspector](https://github.com/modelcontextprotocol/inspector):
+
+```bash
+npx @modelcontextprotocol/inspector node src/index.js
+```
 
 ## Contributing
 

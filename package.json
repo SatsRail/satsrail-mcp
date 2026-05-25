@@ -1,6 +1,6 @@
 {
   "name": "satsrail-mcp",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Bitcoin Lightning payments for AI agents — MCP server for creating orders, invoices, and managing payments via SatsRail",
   "main": "src/index.js",
   "bin": {
@@ -8,11 +8,25 @@
   },
   "type": "module",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "format": "prettier --write \"src/**/*.js\" \"test/**/*.js\""
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.12.1"
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.25.0"
   },
+  "devDependencies": {
+    "prettier": "^3.3.0",
+    "vitest": "^2.1.0"
+  },
+  "files": [
+    "src/",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
   "keywords": [
     "mcp",
     "model-context-protocol",
