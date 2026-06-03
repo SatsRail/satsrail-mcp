@@ -103,10 +103,16 @@ describe("MCP server smoke test", () => {
     expect(init.result.serverInfo.version).toMatch(/^\d+\.\d+\.\d+$/);
   });
 
-  it("registers all 46 tools", async () => {
+  it("registers all 45 tools", async () => {
     const res = await server.send("tools/list");
     const names = res.result.tools.map((t) => t.name);
-    expect(names.length).toBeGreaterThanOrEqual(46);
+    expect(names.length).toBeGreaterThanOrEqual(45);
+  });
+
+  it("does not expose delete_merchant_document (admin-only)", async () => {
+    const res = await server.send("tools/list");
+    const names = res.result.tools.map((t) => t.name);
+    expect(names).not.toContain("delete_merchant_document");
   });
 
   it("includes the surface-completion tools added in v1.2.0", async () => {

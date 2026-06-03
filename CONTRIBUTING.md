@@ -10,6 +10,12 @@ This is a thin MCP wrapper over the SatsRail HTTP API. It does not implement bus
 - Each `server.tool(...)` block maps one MCP tool to one API endpoint.
 - Paths must use `mpath()` (merchant, `sk_*` / `pk_*` auth) or `pubpath()` (public/embed) — never raw strings. The wrong namespace fails silently with a 404. Refer to [`portal/config/routes.rb`](https://github.com/SatsRail/satsrail-portal) for the authoritative path list (private repo).
 
+## Hard rule: no admin endpoints
+
+This MCP only targets `/m/` and `/pub/`. Never `/admin/`. Admin routes are operator-only (`ak_*` tokens, cross-merchant access, audit-tracked lifecycle ops) and are not part of the public API contract. If a merchant-facing capability is currently admin-only, the right fix is a new `/m/` route in the portal — not an MCP tool that wraps an admin endpoint.
+
+PRs that expose an admin operation as a tool will be closed. See `docs/portal/api-namespaces.md` in the parent monorepo for the full rationale.
+
 ## Local development
 
 ```bash

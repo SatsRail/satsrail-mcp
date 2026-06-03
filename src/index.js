@@ -39,7 +39,7 @@ const api = createApi({ apiKey: API_KEY, baseUrl: BASE_URL });
 
 const server = new McpServer({
   name: "satsrail",
-  version: "1.2.0",
+  version: "1.2.1",
 });
 
 // --- Orders ----------------------------------------------------------------
@@ -802,8 +802,8 @@ server.tool(
 
 // --- Merchant Documents (compliance) ---------------------------------------
 //
-// Create requires multipart file upload — not exposed via MCP today. Use the
-// dashboard to upload, then manage status via list/get/delete here.
+// Read-only here. Uploads and deletions are admin operations — managed via
+// the dashboard, not the merchant API surface.
 
 server.tool(
   "list_merchant_documents",
@@ -828,18 +828,6 @@ server.tool(
   async ({ document_id }) => {
     const data = await api("GET", mpath(`/merchant_documents/${document_id}`));
     return { content: [{ type: "text", text: formatJSON(data) }] };
-  }
-);
-
-server.tool(
-  "delete_merchant_document",
-  "Delete a compliance document. Only pending documents can be deleted — approved or rejected ones must stay for audit.",
-  {
-    document_id: z.string().describe("Merchant document UUID"),
-  },
-  async ({ document_id }) => {
-    await api("DELETE", mpath(`/merchant_documents/${document_id}`));
-    return { content: [{ type: "text", text: `Document ${document_id} deleted.` }] };
   }
 );
 

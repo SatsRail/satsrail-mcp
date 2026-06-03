@@ -4,9 +4,9 @@
     <strong>Bitcoin Lightning payments for AI agents via Model Context Protocol</strong>
   </p>
   <p align="center">
-    <a href="https://www.npmjs.com/package/satsrail-mcp"><img src="https://img.shields.io/npm/v/satsrail-mcp" alt="npm"></a>
+    <a href="https://github.com/SatsRail/satsrail-mcp/blob/main/CHANGELOG.md"><img src="https://img.shields.io/github/package-json/v/SatsRail/satsrail-mcp" alt="version"></a>
     <a href="https://github.com/SatsRail/satsrail-mcp/actions/workflows/test.yml"><img src="https://github.com/SatsRail/satsrail-mcp/actions/workflows/test.yml/badge.svg" alt="tests"></a>
-    <a href="https://github.com/SatsRail/satsrail-mcp/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/satsrail-mcp" alt="license"></a>
+    <a href="https://github.com/SatsRail/satsrail-mcp/blob/main/LICENSE"><img src="https://img.shields.io/github/license/SatsRail/satsrail-mcp" alt="license"></a>
     <a href="https://modelcontextprotocol.io"><img src="https://img.shields.io/badge/protocol-MCP-blue" alt="MCP"></a>
     <a href="https://www.satsrail.com/"><img src="https://img.shields.io/badge/payments-Lightning-orange" alt="Lightning"></a>
   </p>
@@ -165,7 +165,7 @@ The agent calls `create_order`, returns the bolt11 Lightning invoice, and the cu
 ### Compliance & Access
 | Tool | Description |
 |------|-------------|
-| `list_merchant_documents` / `get_merchant_document` / `delete_merchant_document` | Manage KYC and compliance documents (upload via dashboard) |
+| `list_merchant_documents` / `get_merchant_document` | Read KYC and compliance documents (uploads and deletions are admin-only) |
 | `verify_access_token` | Verify a macaroon access token, returns key + remaining time on success |
 | `get_api_token_usage` | RPM and monthly request stats for an API token |
 | `list_subscription_plans` | Public list of subscription plans (no auth required) |

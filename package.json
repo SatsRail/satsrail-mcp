@@ -1,6 +1,6 @@
 {
   "name": "satsrail-mcp",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Bitcoin Lightning payments for AI agents — MCP server for creating orders, invoices, and managing payments via SatsRail",
   "main": "src/index.js",
   "bin": {

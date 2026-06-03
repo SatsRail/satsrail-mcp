@@ -2,13 +2,18 @@
 
 All notable changes to `satsrail-mcp` are documented here. This project follows [Semantic Versioning](https://semver.org/).
 
+## [1.2.1] — 2026-05-25
+
+### Removed
+- **`delete_merchant_document`** — document uploads and deletions are admin-only operations and should not be exposed on the merchant API surface. Use the dashboard or admin tooling instead. `list_merchant_documents` and `get_merchant_document` remain.
+
 ## [1.2.0] — 2026-05-24
 
 ### Added
 - **Access verification** — `verify_access_token` for content-delivery clients gating access after payment (macaroon validation, returns product/order/key on success).
 - **Products** — full CRUD (`list_products`, `get_product`, `create_product`, `update_product`, `delete_product`) plus key management (`get_product_key`, `rotate_product_key`, `clear_product_old_key`). Identifiers accept both UUID and slug.
 - **Product types** — full CRUD (`list_product_types`, `get_product_type`, `create_product_type`, `update_product_type`, `delete_product_type`).
-- **Merchant documents** — `list_merchant_documents`, `get_merchant_document`, `delete_merchant_document`. Create requires multipart upload; deferred to a future release.
+- **Merchant documents** — `list_merchant_documents`, `get_merchant_document`. (Removed `delete_merchant_document` in 1.2.1 — admin-only.)
 - **API token usage** — `get_api_token_usage` exposes RPM and monthly request counts.
 - **Checkout sessions** — added `list_checkout_sessions` and `get_checkout_session`. Extended `create_checkout_session` with `product_id`, `customer_email`, `customer_name`, `customer_phone`, `customer_address`, and `metadata`.
 - **Pagination** — every `list_*` tool now accepts `per_page` (1–100, default 25). Portal already supported this; the MCP just didn't expose it.
